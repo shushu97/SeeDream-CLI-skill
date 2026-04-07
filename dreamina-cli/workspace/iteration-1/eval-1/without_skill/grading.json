@@ -1,0 +1,24 @@
+{
+  "expectations": [
+    {
+      "text": "检查是否使用了 dreamina --version 命令",
+      "passed": false,
+      "evidence": "只是告诉用户手动执行命令"
+    },
+    {
+      "text": "检查是否使用了 dreamina user_credit 命令",
+      "passed": false,
+      "evidence": "只是告诉用户手动执行命令"
+    },
+    {
+      "text": "是否提供了安装命令（如未安装）",
+      "passed": true,
+      "evidence": "提到了需要手动检查"
+    },
+    {
+      "text": "是否提供了登录流程（如未登录）",
+      "passed": false,
+      "evidence": "没有提供登录流程"
+    }
+  ]
+}

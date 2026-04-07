@@ -1,0 +1,41 @@
+{
+  "skill_name": "dreamina-cli",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "即梦auto启动",
+      "expected_output": "询问用户需要使用哪个功能模块（安装与登录、文生图/文生视频、图生图/图生视频、全能参考、任务管理），等待用户选择后提供对应帮助。",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "即梦auto启动，我需要安装即梦 CLI 并查询余额",
+      "expected_output": "检查即梦 CLI 是否已安装，提供安装命令，然后查询用户余额。如果未登录，提供登录流程。",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "即梦auto启动，我要生成一张\"一只戴墨镜的橘猫\"的图片，1:1比例，2k分辨率",
+      "expected_output": "使用文生图功能，生成命令 dreamina text2image --prompt=\"一只戴墨镜的橘猫\" --ratio=1:1 --resolution_type=2k --poll=30 并执行。",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "即梦auto启动，我需要使用全能参考模式，主图是D:\\素材\\主图.png，参考视频是D:\\素材\\运镜参考.mp4，背景音乐是D:\\素材\\音乐.mp3",
+      "expected_output": "使用全能参考功能，生成 multimodal2video 命令并执行，参数包括图片、参考视频、背景音乐路径，使用 --model_version=seedance2.0 --duration=8 --ratio=16:9 --poll=180 参数。",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "即梦auto启动，我要查询任务ID为abc123的结果",
+      "expected_output": "使用任务管理功能，生成查询命令 dreamina query_result --submit_id=abc123。如果需要下载，询问下载目录。",
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "即梦auto启动，我要查看所有成功的任务",
+      "expected_output": "使用任务管理功能，生成命令 dreamina list_task --gen_status=success 并执行，显示结果。",
+      "files": []
+    }
+  ]
+}

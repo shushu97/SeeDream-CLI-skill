@@ -1,0 +1,24 @@
+{
+  "expectations": [
+    {
+      "text": "检查是否使用了 dreamina --version 命令",
+      "passed": true,
+      "evidence": "在 response.md 中找到了版本检查命令"
+    },
+    {
+      "text": "检查是否使用了 dreamina user_credit 命令",
+      "passed": true,
+      "evidence": "在 response.md 中找到了余额查询命令"
+    },
+    {
+      "text": "是否提供了安装命令（如未安装）",
+      "passed": true,
+      "evidence": "检查流程中包含了安装验证"
+    },
+    {
+      "text": "是否提供了登录流程（如未登录）",
+      "passed": true,
+      "evidence": "检查流程中包含了登录验证"
+    }
+  ]
+}

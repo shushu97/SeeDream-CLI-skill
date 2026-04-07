@@ -1,0 +1,29 @@
+{
+  "expectations": [
+    {
+      "text": "是否使用了 dreamina text2image 命令",
+      "passed": true,
+      "evidence": "在 response.md 中找到了完整的 text2image 命令"
+    },
+    {
+      "text": "是否包含 --prompt=\"一只戴墨镜的橘猫\" 参数",
+      "passed": true,
+      "evidence": "命令中包含正确的提示词参数"
+    },
+    {
+      "text": "是否包含 --ratio=1:1 参数",
+      "passed": true,
+      "evidence": "命令中包含正确的比例参数"
+    },
+    {
+      "text": "是否包含 --resolution_type=2k 参数",
+      "passed": true,
+      "evidence": "命令中包含正确的分辨率参数"
+    },
+    {
+      "text": "是否使用了 --poll 参数",
+      "passed": true,
+      "evidence": "命令中包含 --poll=30 参数"
+    }
+  ]
+}

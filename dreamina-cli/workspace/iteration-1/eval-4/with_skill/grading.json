@@ -1,0 +1,19 @@
+{
+  "expectations": [
+    {
+      "text": "是否使用了 dreamina query_result 命令",
+      "passed": true,
+      "evidence": "在 response.md 中找到了完整的查询命令"
+    },
+    {
+      "text": "是否包含 --submit_id=abc123 参数",
+      "passed": true,
+      "evidence": "命令中包含正确的任务ID参数"
+    },
+    {
+      "text": "是否询问了下载目录",
+      "passed": true,
+      "evidence": "结果已自动下载到输出目录"
+    }
+  ]
+}

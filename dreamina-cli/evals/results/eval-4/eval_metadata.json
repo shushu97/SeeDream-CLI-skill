@@ -1,0 +1,22 @@
+{
+  "eval_id": 4,
+  "eval_name": "查询任务结果",
+  "prompt": "帮我查询任务ID为abc123的结果",
+  "assertions": [
+    {
+      "text": "是否使用了 dreamina query_result 命令",
+      "passed": false,
+      "evidence": ""
+    },
+    {
+      "text": "是否包含 --submit_id=abc123 参数",
+      "passed": false,
+      "evidence": ""
+    },
+    {
+      "text": "是否询问了是否需要下载结果",
+      "passed": false,
+      "evidence": ""
+    }
+  ]
+}

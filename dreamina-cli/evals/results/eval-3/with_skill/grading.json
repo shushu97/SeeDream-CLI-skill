@@ -1,0 +1,34 @@
+{
+  "expectations": [
+    {
+      "text": "是否使用了 dreamina multimodal2video 命令",
+      "passed": true,
+      "evidence": "在 response.md 中找到了完整的 multimodal2video 命令"
+    },
+    {
+      "text": "是否包含 --image 参数",
+      "passed": true,
+      "evidence": "命令中包含正确的图片路径参数"
+    },
+    {
+      "text": "是否包含 --video 参数",
+      "passed": true,
+      "evidence": "命令中包含正确的视频路径参数"
+    },
+    {
+      "text": "是否包含 --audio 参数",
+      "passed": true,
+      "evidence": "命令中包含正确的音频路径参数"
+    },
+    {
+      "text": "是否包含 --model_version=seedance2.0 参数",
+      "passed": true,
+      "evidence": "命令中包含正确的模型版本参数"
+    },
+    {
+      "text": "是否使用了 --poll 参数",
+      "passed": true,
+      "evidence": "命令中包含 --poll=180 参数"
+    }
+  ]
+}

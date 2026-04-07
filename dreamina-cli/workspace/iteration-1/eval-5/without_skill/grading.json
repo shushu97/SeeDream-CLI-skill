@@ -1,0 +1,19 @@
+{
+  "expectations": [
+    {
+      "text": "是否使用了 dreamina list_task 命令",
+      "passed": false,
+      "evidence": "只是告诉用户手动执行命令"
+    },
+    {
+      "text": "是否包含 --gen_status=success 参数",
+      "passed": true,
+      "evidence": "提供了正确的状态筛选参数"
+    },
+    {
+      "text": "是否解释了如何查看其他状态的任务",
+      "passed": true,
+      "evidence": "提供了其他查询命令示例"
+    }
+  ]
+}

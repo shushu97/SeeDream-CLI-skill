@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dreamina-cli 技能评估结果</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h1 {
+            margin: 0;
+        }
+        .summary {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .summary-item {
+            text-align: center;
+        }
+        .value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        .eval-list {
+            display: grid;
+            gap: 20px;
+        }
+        .eval-card {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .eval-header {
+            background-color: #f0f0f0;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .eval-title {
+            margin: 0;
+            font-size: 18px;
+        }
+        .eval-number {
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+        .eval-content {
+            padding: 20px;
+        }
+        .config-tabs {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .tab-button {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .tab-button.active {
+            border-bottom-color: #4CAF50;
+            color: #4CAF50;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .metrics {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        .metric-item {
+            background-color: #f9f9f9;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+        .metric-value {
+            font-weight: bold;
+        }
+        .results {
+            margin-top: 15px;
+        }
+        .result-item {
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+        .pass {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        .fail {
+            color: #f44336;
+            font-weight: bold;
+        }
+        .details {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: white;
+            border-top: 1px solid #eee;
+            font-size: 14px;
+            color: #666;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .btn.secondary {
+            background-color: #888;
+        }
+        .btn.secondary:hover {
+            background-color: #666;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .metrics {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>dreamina-cli 技能评估结果</h1>
+        <p>2024年1月15日 | 第一迭代</p>
+    </header>
+
+    <div class="container">
+        <div class="summary">
+            <h2>评估总结</h2>
+            <p>所有 5 个测试用例均已运行。with_skill 配置在所有测试中表现完美。</p>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="value">5/5</div>
+                    <div>成功完成评估</div>
+                </div>
+                <div class="summary-item">
+                    <div class="value">100%</div>
+                    <div>with_skill 配置通过率</div>
+                </div>
+                <div class="summary-item">
+                    <div class="value">69%</div>
+                    <div>without_skill 配置通过率</div>
+                </div>
+                <div class="summary-item">
+                    <div class="value">2382</div>
+                    <div>with_skill 平均 Token 使用</div>
+                </div>
+                <div class="summary-item">
+                    <div class="value">43.8秒</div>
+                    <div>with_skill 平均用时</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="eval-list">
+            <div class="eval-card">
+                <div class="eval-header">
+                    <h3 class="eval-title">检查CLI安装和查询余额</h3>
+                    <span class="eval-number">1</span>
+                </div>
+                <div class="eval-content">
+                    <div class="config-tabs">
+                        <button class="tab-button active" onclick="showTab(this, 1, 'with')">with_skill</button>
+                        <button class="tab-button" onclick="showTab(this, 1, 'without')">without_skill</button>
+                    </div>
+
+                    <div id="eval1-with" class="tab-content active">
+                        <div class="results">
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 dreamina --version 命令</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 dreamina user_credit 命令</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 提供了安装验证流程</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 提供了登录验证流程</div>
+                            </div>
+                        </div>
+                        <div class="metrics">
+                            <div class="metric-item">
+                                <div>Token 使用: <span class="metric-value">1250</span></div>
+                            </div>
+                            <div class="metric-item">
+                                <div>用时: <span class="metric-value">4.5秒</span></div>
+                            </div>
+                            <div class="metric-item">
+                                <div>状态: <span class="metric-value">成功</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="eval1-without" class="tab-content">
+                        <div class="results">
+                            <div class="result-item">
+                                <div class="fail">✗ 使用了 dreamina --version 命令</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="fail">✗ 使用了 dreamina user_credit 命令</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 提到了需要检查安装</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="fail">✗ 提供了登录流程</div>
+                            </div>
+                        </div>
+                        <div class="metrics">
+                            <div class="metric-item">
+                                <div>Token 使用: <span class="metric-value">890</span></div>
+                            </div>
+                            <div class="metric-item">
+                                <div>用时: <span class="metric-value">3.2秒</span></div>
+                            </div>
+                            <div class="metric-item">
+                                <div>状态: <span class="metric-value">部分成功</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="eval-card">
+                <div class="eval-header">
+                    <h3 class="eval-title">生成"一只戴墨镜的橘猫"图片</h3>
+                    <span class="eval-number">2</span>
+                </div>
+                <div class="eval-content">
+                    <div class="config-tabs">
+                        <button class="tab-button active" onclick="showTab(this, 2, 'with')">with_skill</button>
+                        <button class="tab-button" onclick="showTab(this, 2, 'without')">without_skill</button>
+                    </div>
+
+                    <div id="eval2-with" class="tab-content active">
+                        <div class="results">
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 dreamina text2image 命令</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 --prompt="一只戴墨镜的橘猫" 参数</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 --ratio=1:1 参数</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 --resolution_type=2k 参数</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 --poll 参数</div>
+                            </div>
+                        </div>
+                        <div class="metrics">
+                            <div class="metric-item">
+                                <div>Token 使用: <span class="metric-value">2850</span></div>
+                            </div>
+                            <div class="metric-item">
+                                <div>用时: <span class="metric-value">28秒</span></div>
+                            </div>
+                            <div class="metric-item">
+                                <div>状态: <span class="metric-value">成功</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="eval2-without" class="tab-content">
+                        <div class="results">
+                            <div class="result-item">
+                                <div class="fail">✗ 使用了 dreamina text2image 命令</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 --prompt="一只戴墨镜的橘猫" 参数</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 --ratio=1:1 参数</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 --resolution_type=2k 参数</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 --poll 参数</div>
+                            </div>
+                        </div>
+                        <div class="metrics">
+                            <div class="metric-item">
+                                <div>Token 使用: <span class="metric-value">1520</span></div>
+                            </div>
+                            <div class="metric-item">
+                                <div>用时: <span class="metric-value">12.5秒</span></div>
+                            </div>
+                            <div class="metric-item">
+                                <div>状态: <span class="metric-value">良好</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="eval-card">
+                <div class="eval-header">
+                    <h3 class="eval-title">全能参考模式</h3>
+                    <span class="eval-number">3</span>
+                </div>
+                <div class="eval-content">
+                    <div class="config-tabs">
+                        <button class="tab-button active" onclick="showTab(this, 3, 'with')">with_skill</button>
+                        <button class="tab-button" onclick="showTab(this, 3, 'without')">without_skill</button>
+                    </div>
+
+                    <div id="eval3-with" class="tab-content active">
+                        <div class="results">
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 dreamina multimodal2video 命令</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 --image 参数</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 --video 参数</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 --audio 参数</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 --model_version=seedance2.0 参数</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 --poll 参数</div>
+                            </div>
+                        </div>
+                        <div class="metrics">
+                            <div class="metric-item">
+                                <div>Token 使用: <span class="metric-value">4280</span></div>
+                            </div>
+                            <div class="metric-item">
+                                <div>用时: <span class="metric-value">175秒</span></div>
+                            </div>
+                            <div class="metric-item">
+                                <div>状态: <span class="metric-value">成功</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="eval3-without" class="tab-content">
+                        <div class="results">
+                            <div class="result-item">
+                                <div class="fail">✗ 使用了 dreamina multimodal2video 命令</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 --image 参数</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 --video 参数</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 --audio 参数</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 --model_version=seedance2.0 参数</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 --poll 参数</div>
+                            </div>
+                        </div>
+                        <div class="metrics">
+                            <div class="metric-item">
+                                <div>Token 使用: <span class="metric-value">2150</span></div>
+                            </div>
+                            <div class="metric-item">
+                                <div>用时: <span class="metric-value">25秒</span></div>
+                            </div>
+                            <div class="metric-item">
+                                <div>状态: <span class="metric-value">良好</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="eval-card">
+                <div class="eval-header">
+                    <h3 class="eval-title">查询任务ID为abc123的结果</h3>
+                    <span class="eval-number">4</span>
+                </div>
+                <div class="eval-content">
+                    <div class="config-tabs">
+                        <button class="tab-button active" onclick="showTab(this, 4, 'with')">with_skill</button>
+                        <button class="tab-button" onclick="showTab(this, 4, 'without')">without_skill</button>
+                    </div>
+
+                    <div id="eval4-with" class="tab-content active">
+                        <div class="results">
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 dreamina query_result 命令</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 --submit_id=abc123 参数</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 自动下载了结果</div>
+                            </div>
+                        </div>
+                        <div class="metrics">
+                            <div class="metric-item">
+                                <div>Token 使用: <span class="metric-value">1850</span></div>
+                            </div>
+                            <div class="metric-item">
+                                <div>用时: <span class="metric-value">6.5秒</span></div>
+                            </div>
+                            <div class="metric-item">
+                                <div>状态: <span class="metric-value">成功</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="eval4-without" class="tab-content">
+                        <div class="results">
+                            <div class="result-item">
+                                <div class="fail">✗ 使用了 dreamina query_result 命令</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 --submit_id=abc123 参数</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="fail">✗ 询问了下载目录</div>
+                            </div>
+                        </div>
+                        <div class="metrics">
+                            <div class="metric-item">
+                                <div>Token 使用: <span class="metric-value">1420</span></div>
+                            </div>
+                            <div class="metric-item">
+                                <div>用时: <span class="metric-value">8.2秒</span></div>
+                            </div>
+                            <div class="metric-item">
+                                <div>状态: <span class="metric-value">良好</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="eval-card">
+                <div class="eval-header">
+                    <h3 class="eval-title">查看所有成功的任务</h3>
+                    <span class="eval-number">5</span>
+                </div>
+                <div class="eval-content">
+                    <div class="config-tabs">
+                        <button class="tab-button active" onclick="showTab(this, 5, 'with')">with_skill</button>
+                        <button class="tab-button" onclick="showTab(this, 5, 'without')">without_skill</button>
+                    </div>
+
+                    <div id="eval5-with" class="tab-content active">
+                        <div class="results">
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 dreamina list_task 命令</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 --gen_status=success 参数</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 解释了如何查看其他状态的任务</div>
+                            </div>
+                        </div>
+                        <div class="metrics">
+                            <div class="metric-item">
+                                <div>Token 使用: <span class="metric-value">1680</span></div>
+                            </div>
+                            <div class="metric-item">
+                                <div>用时: <span class="metric-value">5.2秒</span></div>
+                            </div>
+                            <div class="metric-item">
+                                <div>状态: <span class="metric-value">成功</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="eval5-without" class="tab-content">
+                        <div class="results">
+                            <div class="result-item">
+                                <div class="fail">✗ 使用了 dreamina list_task 命令</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 使用了 --gen_status=success 参数</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="pass">✓ 解释了如何查看其他状态的任务</div>
+                            </div>
+                        </div>
+                        <div class="metrics">
+                            <div class="metric-item">
+                                <div>Token 使用: <span class="metric-value">1180</span></div>
+                            </div>
+                            <div class="metric-item">
+                                <div>用时: <span class="metric-value">6.8秒</span></div>
+                            </div>
+                            <div class="metric-item">
+                                <div>状态: <span class="metric-value">良好</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>dreamina-cli 技能评估报告 | 第一迭代 | 2024年1月</p>
+        <p>数据来源: D:\AI\AIcode\.claude\skills\dreamina-cli\workspace\iteration-1\</p>
+        <div style="margin-top: 10px;">
+            <a href="benchmark.json" class="btn">下载 JSON 数据</a>
+            <a href="benchmark.md" class="btn secondary">查看 Markdown 报告</a>
+        </div>
+    </footer>
+</div>
+
+<script>
+    function showTab(button, evalNum, config) {
+        // 移除所有按钮的 active 状态
+        const buttons = button.parentElement.querySelectorAll('.tab-button');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        // 隐藏所有内容
+        const withContent = document.getElementById(`eval${evalNum}-with`);
+        const withoutContent = document.getElementById(`eval${evalNum}-without`);
+        withContent.classList.remove('active');
+        withoutContent.classList.remove('active');
+
+        // 显示对应的内容
+        if (config === 'with') {
+            withContent.classList.add('active');
+        } else {
+            withoutContent.classList.add('active');
+        }
+    }
+
+    // 页面加载时添加一些动画效果
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.eval-card');
+        cards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+
+            setTimeout(() => {
+                card.style.transition = 'all 0.5s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, index * 150);
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+{
+  "eval_id": 3,
+  "eval_name": "全能参考模式",
+  "prompt": "我需要使用全能参考模式，主图是D:\素材\主图.png，参考视频是D:\素材\运镜参考.mp4，背景音乐是D:\素材\音乐.mp3",
+  "assertions": [
+    {
+      "text": "是否使用了 dreamina multimodal2video 命令",
+      "passed": false,
+      "evidence": ""
+    },
+    {
+      "text": "是否包含 --image 参数",
+      "passed": false,
+      "evidence": ""
+    },
+    {
+      "text": "是否包含 --video 参数",
+      "passed": false,
+      "evidence": ""
+    },
+    {
+      "text": "是否包含 --audio 参数",
+      "passed": false,
+      "evidence": ""
+    },
+    {
+      "text": "是否使用了 --model_version=seedance2.0 参数",
+      "passed": false,
+      "evidence": ""
+    },
+    {
+      "text": "是否使用了 --poll 参数",
+      "passed": false,
+      "evidence": ""
+    }
+  ]
+}

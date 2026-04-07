@@ -1,0 +1,27 @@
+{
+  "eval_id": 1,
+  "eval_name": "检查CLI安装和查询余额",
+  "prompt": "帮我检查即梦 CLI 是否已经安装，并查询余额",
+  "assertions": [
+    {
+      "text": "检查是否使用了 dreamina --version 命令",
+      "passed": false,
+      "evidence": ""
+    },
+    {
+      "text": "检查是否使用了 dreamina user_credit 命令",
+      "passed": false,
+      "evidence": ""
+    },
+    {
+      "text": "是否提供了安装命令（如未安装）",
+      "passed": false,
+      "evidence": ""
+    },
+    {
+      "text": "是否提供了登录流程（如未登录）",
+      "passed": false,
+      "evidence": ""
+    }
+  ]
+}

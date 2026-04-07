@@ -1,0 +1,32 @@
+{
+  "eval_id": 2,
+  "eval_name": "generate-cat-image",
+  "prompt": "帮我生成一张\"一只戴墨镜的橘猫\"的图片，1:1比例，2k分辨率",
+  "assertions": [
+    {
+      "text": "是否使用了 dreamina text2image 命令",
+      "passed": false,
+      "evidence": ""
+    },
+    {
+      "text": "是否包含 --prompt=\"一只戴墨镜的橘猫\" 参数",
+      "passed": false,
+      "evidence": ""
+    },
+    {
+      "text": "是否包含 --ratio=1:1 参数",
+      "passed": false,
+      "evidence": ""
+    },
+    {
+      "text": "是否包含 --resolution_type=2k 参数",
+      "passed": false,
+      "evidence": ""
+    },
+    {
+      "text": "是否使用了 --poll 参数",
+      "passed": false,
+      "evidence": ""
+    }
+  ]
+}
